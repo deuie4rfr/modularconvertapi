@@ -1,4 +1,4 @@
-const person = { name: "Alice", age: 30 };
-if (person.hasOwnProperty("age")) {
-  console.log("The person has an age property");
+function factorial(n) {
+  if (n === 0 || n === 1) return 1;
+  return n * factorial(n - 1);
 }
