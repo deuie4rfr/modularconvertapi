@@ -1,15 +1,12 @@
-function countSubstrings(s) {
-  let count = 0;
-  for (let i = 0; i < s.length; i++) {
-    extendPalindrome(i, i);
-    extendPalindrome(i, i + 1);
-  }
-  return count;
-  function extendPalindrome(left, right) {
-    while (left >= 0 && right < s.length && s[left] === s[right]) {
-      count++;
-      left--;
-      right++;
-    }
-  }
+function buildTree(inorder, postorder) {
+  if (!inorder.length || !postorder.length) return null;
+  const rootVal = postorder[postorder.length - 1];
+  const root = new TreeNode(rootVal);
+  const mid = inorder.indexOf(rootVal);
+  root.left = buildTree(inorder.slice(0, mid), postorder.slice(0, mid));
+  root.right = buildTree(
+    inorder.slice(mid + 1),
+    postorder.slice(mid, postorder.length - 1),
+  );
+  return root;
 }
