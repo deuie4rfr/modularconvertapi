@@ -1,14 +1,14 @@
-const selectionSort = (arr) => {
-  for (let i = 0; i < arr.length; i++) {
-    let minIndex = i;
-    for (let j = i + 1; j < arr.length; j++) {
-      if (arr[j] < arr[minIndex]) {
-        minIndex = j;
-      }
+function subarraySum(nums, k) {
+  const map = new Map();
+  map.set(0, 1);
+  let count = 0;
+  let sum = 0;
+  for (const num of nums) {
+    sum += num;
+    if (map.has(sum - k)) {
+      count += map.get(sum - k);
     }
-    if (minIndex !== i) {
-      [arr[i], arr[minIndex]] = [arr[minIndex], arr[i]];
-    }
+    map.set(sum, (map.get(sum) || 0) + 1);
   }
-  return arr;
-};
+  return count;
+}
